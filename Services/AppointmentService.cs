@@ -19,38 +19,30 @@ namespace AppointmentApi.Services
             return appointment;
         }
 
-
-        public async Task<Appointment> GetByIdAsync(string id)
+        public async Task<Appointment?> GetByIdAsync(string id)
         {
             return await _appointments.Find(a => a.Id == id).FirstOrDefaultAsync();
         }
 
-        public Appointment GetById(string id)
+        public async Task<List<Appointment>> GetByOfficeNameAsync(string officeName)
         {
-            return _appointments.Find(a => a.Id == id).FirstOrDefault();
+            return await _appointments.Find(a => a.Office.Name == officeName).ToListAsync();
         }
 
-        public async Task<List<Appointment>> GetByOfficeAsync(string officeId)
+        public async Task<List<Appointment>> GetByCityCodeAsync(int cityCode)
         {
-            return await _appointments.Find(a => a.OfficeId == officeId).ToListAsync();
+            return await _appointments.Find(a => a.Office.CityCode == cityCode).ToListAsync();
         }
 
-        public List<Appointment> GetByOffice(string officeId)
+        public async Task<List<Appointment>> GetByCitizenIdAsync(int citizenId)
         {
-            return _appointments.Find(a => a.OfficeId == officeId).ToList();
+            return await _appointments.Find(a => a.CitizenId == citizenId).ToListAsync();
         }
 
         public async Task<bool> CancelAsync(string id)
         {
             var update = Builders<Appointment>.Update.Set(a => a.Status, "Cancelled");
             var result = await _appointments.UpdateOneAsync(a => a.Id == id, update);
-            return result.ModifiedCount > 0;
-        }
-
-        public bool Cancel(string id)
-        {
-            var update = Builders<Appointment>.Update.Set(a => a.Status, "Cancelled");
-            var result = _appointments.UpdateOne(a => a.Id == id, update);
             return result.ModifiedCount > 0;
         }
     }
