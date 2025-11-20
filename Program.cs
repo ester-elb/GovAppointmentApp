@@ -9,14 +9,19 @@ builder.Services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
 // MongoDB
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
-    var connectionString = builder.Configuration.GetValue<string>("MongoDB:ConnectionString") 
-        ?? Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
+    var connectionString = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
+    
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        connectionString = builder.Configuration.GetValue<string>("MongoDB:ConnectionString");
+    }
     
     if (string.IsNullOrEmpty(connectionString))
         throw new InvalidOperationException("MongoDB connection string not found");
         
     return new MongoClient(connectionString);
 });
+
 
 // Services
 builder.Services.AddSingleton<AppointmentService>();
