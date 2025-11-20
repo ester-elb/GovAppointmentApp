@@ -9,19 +9,19 @@ namespace AppointmentApi.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         
-        [BsonElement("officeId")]
-        public string? OfficeId { get; set; }
+        [BsonElement("Office")]
+        public Office? Office { get; set; }
         
-        [BsonElement("citizenId")]
-        public string? CitizenId { get; set; }
+        [BsonElement("CitizenId")]
+        public int? CitizenId { get; set; }
         
-        [BsonElement("date")]
+        [BsonElement("Date")]
         public DateTime Date { get; set; }
         
-        [BsonElement("serviceTypeId")]
-        public string? ServiceTypeId { get; set; }
+        [BsonElement("ServiceTypeId")]
+        public int? ServiceTypeId { get; set; }
         
-        [BsonElement("status")]
+        [BsonElement("Status")]
         public string Status { get; set; } = "Scheduled";
     }
 }
