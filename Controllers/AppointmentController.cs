@@ -23,24 +23,39 @@ namespace AppointmentApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        public async Task<IActionResult> GetById(string id)
         {
-            var result = _service.GetById(id);
+            var result = await _service.GetByIdAsync(id);
             if (result == null) return NotFound();
             return Ok(result);
         }
 
-        [HttpGet("office/{officeId}")]
-        public IActionResult GetByOffice(string officeId)
+        [HttpGet("office/{officeName}")]
+        public async Task<IActionResult> GetByOfficeName(string officeName)
         {
-            return Ok(_service.GetByOffice(officeId));
+            var result = await _service.GetByOfficeNameAsync(officeName);
+            return Ok(result);
+        }
+
+        [HttpGet("city/{cityCode}")]
+        public async Task<IActionResult> GetByCityCode(int cityCode)
+        {
+            var result = await _service.GetByCityCodeAsync(cityCode);
+            return Ok(result);
+        }
+
+        [HttpGet("citizen/{citizenId}")]
+        public async Task<IActionResult> GetByCitizenId(int citizenId)
+        {
+            var result = await _service.GetByCitizenIdAsync(citizenId);
+            return Ok(result);
         }
 
         [HttpPut("{id}/cancel")]
-        public IActionResult Cancel(string id)
+        public async Task<IActionResult> Cancel(string id)
         {
-            var ok = _service.Cancel(id);
-            if (!ok) return NotFound();
+            var success = await _service.CancelAsync(id);
+            if (!success) return NotFound();
             return Ok(new { message = "Appointment cancelled" });
         }
     }
