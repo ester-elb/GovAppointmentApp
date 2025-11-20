@@ -6,8 +6,7 @@ namespace AppointmentApi.Models
     public class Office
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        public int? Id { get; set; }
         
         [BsonElement("Name")]
         public string? Name { get; set; }
