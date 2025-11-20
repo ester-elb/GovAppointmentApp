@@ -15,14 +15,15 @@ Backend: ASP.NET Core 9.0 (C#)
 
 Database: MongoDB Atlas (Cloud)
 
-Hosting: Railway (Cloud Platform)
+Hosting: Railway (Cloud Platform) - לגבי שימוש בפלטפורמה זו, הערה למטה
 
 API Documentation: Swagger/OpenAPI
 
 Version Control: GitHub
 
 פריסה בענן
-Railway Platform
+--נעשה באמצעות פלטפורמה Railway (ולא בAQS/GCP כפי שנדרש) בגלל מגבלות של התקנות תוכנה/חשבונות משתמשים במחשב בו נעשה התרגיל
+Railway Platform - 
 URL: https://govappointmentapp-production.up.railway.app
 
 Auto-deployment: מ-GitHub Repository
